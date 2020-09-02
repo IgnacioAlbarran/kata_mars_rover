@@ -1,4 +1,6 @@
 require_relative 'rover'
+require_relative 'point'
+require 'byebug'
 
 describe 'rover' do
   it 'there is a rover' do
@@ -11,6 +13,9 @@ describe 'rover' do
     rover = Rover.new
 
     expect(rover.give_position).to eq([0, 0])
+  end
+
+  xit 'rover has a facing direction' do
   end
 end
 

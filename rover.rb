@@ -1,9 +1,9 @@
 class Rover
   def initialize
-    @position = [0, 0]
+    @point = Point.new
   end
 
   def give_position
-    [0, 0]
+    @point.get_position
   end
 end
