@@ -6,6 +6,12 @@ describe 'rover' do
 
     expect(rover.instance_of?(Rover)).to eq(true)
   end
+
+  it 'rover has a starting point' do
+    rover = Rover.new
+
+    expect(rover.give_position).to eq([0, 0])
+  end
 end
 
 =begin
