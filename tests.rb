@@ -3,19 +3,34 @@ require_relative 'point'
 require 'byebug'
 
 describe 'rover' do
-  it 'there is a rover' do
-    rover = Rover.new
+  it 'exists' do
+    rover = Rover.new(0, 0, 'N')
 
     expect(rover.instance_of?(Rover)).to eq(true)
   end
 
-  it 'rover has a starting point' do
-    rover = Rover.new
+  it 'has a starting point' do
+    rover = Rover.new(0, 0, 'N')
 
     expect(rover.give_position).to eq([0, 0])
   end
 
-  xit 'rover has a facing direction' do
+  it 'has a facing direction' do
+    rover = Rover.new(0, 0, 'N')
+
+    expect(rover.give_direction).to eq('N')
+  end
+
+  it 'moves forwards' do
+    rover = Rover.new(0, 0, 'N')
+    rover.commands(['f', 'f', 'f'])
+    expect(rover.give_position).to eq([0, 3])
+  end
+
+  it 'moves backwards' do
+    rover = Rover.new(2, 2, 'E')
+    rover.commands(['b', 'b'])
+    expect(rover.give_position).to eq([0, 2])
   end
 end
 
