@@ -1,9 +1,9 @@
 class Point
-
   def initialize(x, y, direction)
     @x = x
     @y = y
     @dir = direction
+    @mars = Planet.new
   end
 
   DIRECTIONS = ['N', 'E', 'S', 'W']
@@ -27,6 +27,8 @@ class Point
     when 'W'
       @x -= 1
     end
+
+    check_map
   end
 
   def move_backward
@@ -40,6 +42,8 @@ class Point
     when 'W'
       @x += 1
     end
+
+    check_map
   end
 
   def turn(orientation)
@@ -48,5 +52,10 @@ class Point
     else
       @dir = DIRECTIONS[(DIRECTIONS.index{ |i| i == @dir } - 1)]
     end
+  end
+
+  def check_map
+    @x = @x % @mars.planet[:x].max
+    @y = @y % @mars.planet[:y].max
   end
 end

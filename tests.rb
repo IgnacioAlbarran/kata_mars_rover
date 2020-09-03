@@ -5,27 +5,27 @@ require 'byebug'
 
 describe 'rover' do
   it 'exists' do
-    rover = Rover.new(0, 0, 'N')
+    rover = Rover.new(1, 1, 'N')
 
     expect(rover.instance_of?(Rover)).to eq(true)
   end
 
   it 'has a starting point' do
-    rover = Rover.new(0, 0, 'N')
+    rover = Rover.new(1, 1, 'N')
 
-    expect(rover.give_position).to eq([0, 0])
+    expect(rover.give_position).to eq([1, 1])
   end
 
   it 'has a facing direction' do
-    rover = Rover.new(0, 0, 'N')
+    rover = Rover.new(1, 1, 'N')
 
     expect(rover.give_direction).to eq('N')
   end
 
   it 'moves forwards' do
-    rover = Rover.new(0, 0, 'N')
+    rover = Rover.new(1, 1, 'N')
     rover.commands(['f', 'f', 'f'])
-    expect(rover.give_position).to eq([0, 3])
+    expect(rover.give_position).to eq([1, 4])
   end
 
   it 'moves backwards' do
@@ -47,10 +47,16 @@ describe 'rover' do
     expect(rover.give_direction).to eq('W')
   end
 
-  xit 'can move along the map overpassing the edges' do
+  it 'moves overpassing the edges in the north' do
     rover = Rover.new(2, 4, 'N')
     rover.commands(['f','f'])
     expect(rover.give_position).to eq([2, 1])
+  end
+
+  it 'moves overpassing the edges in the south' do
+    rover = Rover.new(2, 1, 'S')
+    rover.commands(['f','f', 'f'])
+    expect(rover.give_position).to eq([2, 3])
   end
 end
 
