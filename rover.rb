@@ -1,6 +1,7 @@
 class Rover
   def initialize(x, y, direction)
     @point = Point.new(x, y, direction)
+    @mars = Planet.new
   end
 
   def give_position
@@ -18,6 +19,10 @@ class Rover
         move_forward
       when 'b'
         move_backward
+      when 'r'
+        turn(:right)
+      when 'l'
+        turn(:left)
       end
     end
   end
@@ -30,5 +35,9 @@ class Rover
 
   def move_backward
     @point.move_backward
+  end
+
+  def turn(direction)
+    @point.turn(direction)
   end
 end

@@ -1,5 +1,6 @@
 require_relative 'rover'
 require_relative 'point'
+require_relative 'planet'
 require 'byebug'
 
 describe 'rover' do
@@ -31,6 +32,25 @@ describe 'rover' do
     rover = Rover.new(2, 2, 'E')
     rover.commands(['b', 'b'])
     expect(rover.give_position).to eq([0, 2])
+  end
+
+  it 'turns right' do
+    rover = Rover.new(0, 0, 'E')
+
+    rover.commands(['r', 'r'])
+    expect(rover.give_direction).to eq('W')
+  end
+
+  it 'turns left' do
+    rover = Rover.new(0, 0, 'E')
+    rover.commands(['l', 'l'])
+    expect(rover.give_direction).to eq('W')
+  end
+
+  xit 'can move along the map overpassing the edges' do
+    rover = Rover.new(2, 4, 'N')
+    rover.commands(['f','f'])
+    expect(rover.give_position).to eq([2, 1])
   end
 end
 

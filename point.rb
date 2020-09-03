@@ -1,4 +1,5 @@
 class Point
+
   def initialize(x, y, direction)
     @x = x
     @y = y
@@ -38,6 +39,14 @@ class Point
       @y += 1
     when 'W'
       @x += 1
+    end
+  end
+
+  def turn(orientation)
+    if orientation == :right
+      @dir = DIRECTIONS[(DIRECTIONS.index{ |i| i == @dir } + 1) % 4]
+    else
+      @dir = DIRECTIONS[(DIRECTIONS.index{ |i| i == @dir } - 1)]
     end
   end
 end
