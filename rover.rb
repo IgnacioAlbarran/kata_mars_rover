@@ -1,5 +1,3 @@
-require_relative 'rover'
-
 class Rover
   attr_accessor :dir
 
