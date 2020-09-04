@@ -1,3 +1,5 @@
+require_relative 'rover'
+
 class Rover
   attr_accessor :dir
 
@@ -26,53 +28,24 @@ class Rover
     save_last_point
 
     commands_array.each do |command|
-      case command
-      when 'f'
-        move_forward
-      when 'b'
-        move_backward
-      when 'r'
-        turn(:right)
-      when 'l'
-        turn(:left)
-      end
+      move(command) if (command == 'f' || command == 'b')
+      turn(command) if (command == 'r' || command == 'l')
     end
   end
 
   private
 
-  def move_forward
-    case dir
-    when 'N'
-      @point.y += 1
-    when 'E'
-      @point.x += 1
-    when 'S'
-      @point.y -= 1
-    when 'W'
-      @point.x -= 1
-    end
-
-    check_map
-  end
-
-  def move_backward
-    case dir
-    when 'N'
-      @point.y -= 1
-    when 'E'
-      @point.x -= 1
-    when 'S'
-      @point.y += 1
-    when 'W'
-      @point.x += 1
-    end
+  def move(command)
+    @point = Point.new(@point.x, @point.y + 1) if (@dir == 'N' && command == 'f') || (@dir == 'S' && command == 'b')
+    @point = Point.new(@point.x, @point.y - 1) if (@dir == 'S' && command == 'f') || (@dir == 'N' && command == 'b')
+    @point = Point.new(@point.x + 1, @point.y) if (@dir == 'E' && command == 'f') || (@dir == 'W' && command == 'b')
+    @point = Point.new(@point.x - 1, @point.y) if (@dir == 'W' && command == 'f') || (@dir == 'E' && command == 'b')
 
     check_map
   end
 
   def turn(orientation)
-    if orientation == :right
+    if orientation == 'r'
       @dir = DIRECTIONS[(DIRECTIONS.index{ |i| i == dir } + 1) % 4]
     else
       @dir = DIRECTIONS[(DIRECTIONS.index{ |i| i == dir } - 1)]
