@@ -29,9 +29,7 @@ class Rover
 
   def move(command)
     next_coordinates = @mars.next_coordinates(@point, @dir, command)
-    return if @mars.obstacle?(next_coordinates)
     @point = Point.new(next_coordinates[0], next_coordinates[1])
-    @mars.check_map(@point)
   end
 
   def turn(orientation)

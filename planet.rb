@@ -10,18 +10,24 @@ class Planet
   end
 
   def next_coordinates(point, dir, command)
-    return [point.x, point.y + 1] if (dir == 'N' && command == 'f') || (dir == 'S' && command == 'b')
-    return [point.x, point.y - 1] if (dir == 'S' && command == 'f') || (dir == 'N' && command == 'b')
-    return [point.x + 1, point.y] if (dir == 'E' && command == 'f') || (dir == 'W' && command == 'b')
-    return [point.x - 1, point.y] if (dir == 'W' && command == 'f') || (dir == 'E' && command == 'b')
+    return check_map(point.x, point.y + 1, point) if (dir == 'N' && command == 'f') || (dir == 'S' && command == 'b')
+    return check_map(point.x, point.y - 1, point) if (dir == 'S' && command == 'f') || (dir == 'N' && command == 'b')
+    return check_map(point.x + 1, point.y, point) if (dir == 'E' && command == 'f') || (dir == 'W' && command == 'b')
+    return check_map(point.x - 1, point.y, point) if (dir == 'W' && command == 'f') || (dir == 'E' && command == 'b')
   end
 
-  def check_map(point)
-    point.x = planet[:x].to_a[(point.x - 1) % 5]
-    point.y = planet[:y].to_a[(point.y - 1) % 5]
+  def check_map(possible_x, possible_y, point)
+    return point.get_position if obstacle?(possible_x, possible_y)
+    check_borders(possible_x, possible_y)
   end
 
-  def obstacle?(coordinates)
-    obstacles.include?(coordinates)
+  def check_borders(possible_x, possible_y)
+    x = planet[:x].to_a[(possible_x - 1) % 5]
+    y = planet[:y].to_a[(possible_y - 1) % 5]
+    return [x, y]
+  end
+
+  def obstacle?(x, y)
+    obstacles.include?([x, y])
   end
 end
