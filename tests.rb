@@ -11,7 +11,7 @@ describe 'rover' do
 
   it 'has a starting point' do
     rover = Rover.new(1, 1, 'N')
-    expect(rover.give_position).to eq([1, 1])
+    expect(rover.give_location).to eq([1, 1])
   end
 
   it 'has a facing direction' do
@@ -22,13 +22,13 @@ describe 'rover' do
   it 'moves forwards' do
     rover = Rover.new(1, 1, 'N')
     rover.commands(['f', 'f', 'f'])
-    expect(rover.give_position).to eq([1, 4])
+    expect(rover.give_location).to eq([1, 4])
   end
 
   it 'moves backwards' do
     rover = Rover.new(3, 2, 'E')
     rover.commands(['b', 'b'])
-    expect(rover.give_position).to eq([1, 2])
+    expect(rover.give_location).to eq([1, 2])
   end
 
   it 'turns right' do
@@ -46,18 +46,18 @@ describe 'rover' do
   it 'overpassing the edges in the north appears in the south' do
     rover = Rover.new(2, 5, 'N')
     rover.commands(['f', 'f'])
-    expect(rover.give_position).to eq([2, 2])
+    expect(rover.give_location).to eq([2, 2])
   end
 
   it 'overpassing the edges in the south appears in the north' do
     rover = Rover.new(2, 1, 'S')
     rover.commands(['f','f'])
-    expect(rover.give_position).to eq([2, 4])
+    expect(rover.give_location).to eq([2, 4])
   end
 
   it 'when mars rover finds an obstacle stops' do
     rover = Rover.new(1, 4, 'N')
     rover.commands(['f'])
-    expect(rover.give_position).to eq([1, 4])
+    expect(rover.give_location).to eq([1, 4])
   end
 end

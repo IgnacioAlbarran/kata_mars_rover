@@ -10,8 +10,8 @@ class Rover
 
   DIRECTIONS = ['N', 'E', 'S', 'W']
 
-  def give_position
-    @point.get_position
+  def give_location
+    @point.get_location
   end
 
   def give_direction

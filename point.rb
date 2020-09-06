@@ -6,7 +6,7 @@ class Point
     @y = y
   end
 
-  def get_position
+  def get_location
     [@x, @y]
   end
 end
