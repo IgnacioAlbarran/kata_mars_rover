@@ -25,11 +25,8 @@ class Rover
     end
   end
 
-  private
-
   def move(command)
-    next_coordinates = @mars.next_coordinates(@point, @dir, command)
-    @point = Point.new(next_coordinates[0], next_coordinates[1])
+    @point = @mars.next_point(@point, @dir, command)
   end
 
   def turn(orientation)
