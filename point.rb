@@ -1,5 +1,3 @@
-require_relative 'rover'
-
 class Point
   attr_accessor :x, :y
 
